@@ -146,7 +146,7 @@
 	);
 </script>
 
-<div class="container mx-auto mt-10 p-10">
+<div class="container mx-auto p-10 dark:bg-gray-800 dark:text-white">
 	<h1 class="text-2xl font-bold mb-4">Manifest Generator</h1>
 	<div class="flex gap-4 mb-10">
 		<div class="basis-2/3">
@@ -160,7 +160,7 @@
 						type="text"
 						bind:value={formData.name}
 						placeholder="Name"
-						class="input bg-white p-2 rounded border border-gray-300 w-full"
+						class="input bg-white p-2 rounded border border-gray-300 dark:bg-gray-700 dark:text-white w-full"
 						required
 					/>
 				</div>
@@ -173,7 +173,7 @@
 						type="text"
 						bind:value={formData.short_name}
 						placeholder="Short Name"
-						class="input bg-white p-2 rounded border border-gray-300 w-full"
+						class="input bg-white p-2 rounded border border-gray-300 dark:bg-gray-700 dark:text-white w-full"
 						required
 					/>
 				</div>
@@ -182,7 +182,7 @@
 					<select
 						id="display"
 						bind:value={formData.display}
-						class="select bg-white p-2 rounded border border-gray-300 w-full"
+						class="select bg-white p-2 rounded border border-gray-300 dark:bg-gray-700 dark:text-white w-full"
 					>
 						{#each displayOptions as option}
 							<option value={option}>{option}</option>
@@ -196,7 +196,7 @@
 						type="text"
 						bind:value={formData.description}
 						placeholder="Description"
-						class="input bg-white p-2 rounded border border-gray-300 w-full"
+						class="input bg-white p-2 rounded border border-gray-300 dark:bg-gray-700 dark:text-white w-full"
 					/>
 				</div>
 				<div>
@@ -206,7 +206,7 @@
 						type="text"
 						bind:value={formData.scope}
 						placeholder="Application Scope"
-						class="input bg-white p-2 rounded border border-gray-300 w-full"
+						class="input bg-white p-2 rounded border border-gray-300 dark:bg-gray-700 dark:text-white w-full"
 					/>
 				</div>
 				<div>
@@ -218,7 +218,7 @@
 						type="text"
 						bind:value={formData.start_url}
 						placeholder="Start URL"
-						class="input bg-white p-2 rounded border border-gray-300 w-full"
+						class="input bg-white p-2 rounded border border-gray-300 dark:bg-gray-700 dark:text-white w-full"
 						required
 					/>
 				</div>
@@ -228,7 +228,7 @@
 						id="themeColor"
 						type="color"
 						bind:value={formData.theme_color}
-						class="color-picker p-1 h-10 rounded border border-gray-300 w-full"
+						class="color-picker p-1 h-10 rounded border border-gray-300 dark:bg-gray-700 dark:text-white w-full"
 					/>
 				</div>
 				<div>
@@ -239,7 +239,7 @@
 						id="backgroundColor"
 						type="color"
 						bind:value={formData.background_color}
-						class="color-picker p-1 h-10 rounded border border-gray-300 w-full"
+						class="color-picker p-1 h-10 rounded border border-gray-300 dark:bg-gray-700 dark:text-white w-full"
 						required
 					/>
 				</div>
@@ -253,7 +253,7 @@
 						type="file"
 						accept="image/png, image/jpeg"
 						on:change={handleFileChange}
-						class="file-input bg-white p-2 rounded border border-gray-300 w-full"
+						class="file-input bg-white p-2 rounded border border-gray-300 dark:bg-gray-700 dark:text-white w-full"
 					/>
 					{#if errorImageMessage}
 						<p class="text-red-500">{errorImageMessage}</p>
@@ -271,7 +271,9 @@
 		<div class="basis-1/3">
 			<div class="p-4">
 				<h3 class="text-lg font-semibold mb-2">manifest.json preview</h3>
-				<pre class="overflow-auto max-h-96 bg-gray-100 p-5"><code>{manifestPreview}</code></pre>
+				<pre class="overflow-auto max-h-96 bg-gray-100 dark:bg-gray-600 p-5"><code
+						class="dark:text-white">{manifestPreview}</code
+					></pre>
 			</div>
 		</div>
 	</div>
