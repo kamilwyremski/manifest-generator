@@ -18,11 +18,7 @@
 	const displayOptions = ['fullscreen', 'standalone', 'minimal-ui', 'browser'];
 
 	$: isSubmitDisabled =
-		!formData.name ||
-		!formData.short_name ||
-		!formData.start_url ||
-		!formData.background_color ||
-		!formData.icons;
+		!formData.name || !formData.short_name || !formData.start_url || !formData.background_color;
 
 	function handleSubmit() {
 		if (isSubmitDisabled) {
@@ -48,8 +44,8 @@
 			}
 		}
 
-		for (const size of iconSizes) {
-			if (formData.icons) {
+		if (formData.icons) {
+			for (const size of iconSizes) {
 				const img: HTMLImageElement = new Image();
 				img.onload = function () {
 					addIcon(img, size);
@@ -93,6 +89,19 @@
 				};
 				img.src = URL.createObjectURL(formData.icons);
 			}
+		} else {
+			const blob = new Blob([JSON.stringify({ ...formData, icons: undefined }, null, 2)], {
+				type: 'application/json'
+			});
+			const url = URL.createObjectURL(blob);
+
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'manifest.json';
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+			URL.revokeObjectURL(url);
 		}
 	}
 
@@ -138,8 +147,8 @@
 </script>
 
 <div class="container mx-auto mt-10 p-10">
-	<h2 class="text-2xl font-bold mb-4">Manifest Generator</h2>
-	<div class="flex gap-4">
+	<h1 class="text-2xl font-bold mb-4">Manifest Generator</h1>
+	<div class="flex gap-4 mb-10">
 		<div class="basis-2/3">
 			<form on:submit|preventDefault={handleSubmit} class="grid grid-cols-2 gap-4">
 				<div>
@@ -235,9 +244,7 @@
 					/>
 				</div>
 				<div class="col-span-2">
-					<label for="file" class="block mb-1 font-semibold"
-						>Icon <span class="text-red-500">*</span></label
-					>
+					<label for="file" class="block mb-1 font-semibold">Icon</label>
 					<p class="text-sm text-gray-500 mb-1">
 						Please upload a 512x512 image for the icon and we'll generate the remaining sizes
 					</p>
@@ -247,7 +254,6 @@
 						accept="image/png, image/jpeg"
 						on:change={handleFileChange}
 						class="file-input bg-white p-2 rounded border border-gray-300 w-full"
-						required
 					/>
 					{#if errorImageMessage}
 						<p class="text-red-500">{errorImageMessage}</p>
@@ -269,4 +275,32 @@
 			</div>
 		</div>
 	</div>
+	<p class="mb-2">
+		The Manifest.json File Generator is an online tool that facilitates easy creation of a manifest
+		file for your web application. The JSON manifest is a configuration file that defines basic
+		information about your application such as name, icon, colors, and other properties. With our
+		tool, you can quickly configure the manifest, customizing it to suit your application's
+		requirements.
+	</p>
+	<p class="mb-2">
+		Our tool is SEO-friendly, meaning the generated manifest.json file is optimized for search
+		engines. This enhances the recognition of your application by search engines, potentially
+		improving its visibility in search results.
+	</p>
+	<p class="mb-2">
+		Moreover, our tool is user-friendly and requires no technical knowledge. Simply fill out the
+		form, specify your application preferences, and then download the ready-made manifest.json file,
+		ready to be added to your project.
+	</p>
+	<p class="mb-2">Start using our tool today and enhance the visibility of your web application!</p>
+	<p class="mb-2">
+		This project is Open Source. You can see source code here: <a
+			href="https://github.com/kamilwyremski/manifest-generator"
+			title="Manifest Generator Source Code">https://github.com/kamilwyremski/manifest-generator</a
+		>
+	</p>
+	<p class="mb-10">Happy coding!</p>
+	<p class="text-sm">
+		Project 2024 by <a href="http://wyremski.pl/en" title="Web Developer">Kamil Wyremski</a>
+	</p>
 </div>
