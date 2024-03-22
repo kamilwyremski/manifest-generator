@@ -146,11 +146,11 @@
 	);
 </script>
 
-<div class="container mx-auto p-10 dark:bg-gray-800 dark:text-white">
+<div class="container mx-auto p-5 md:p-10 dark:bg-gray-800 dark:text-white">
 	<h1 class="text-2xl font-bold mb-4">Manifest Generator</h1>
-	<div class="flex gap-4 mb-10">
-		<div class="basis-2/3">
-			<form on:submit|preventDefault={handleSubmit} class="grid grid-cols-2 gap-4">
+	<div class="flex flex-col gap-4 mb-10 md:flex-row">
+		<div class="w-full md:basis-2/3">
+			<form on:submit|preventDefault={handleSubmit} class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<div>
 					<label for="name" class="block mb-1 font-semibold"
 						>Name <span class="text-red-500">*</span></label
@@ -243,7 +243,7 @@
 						required
 					/>
 				</div>
-				<div class="col-span-2">
+				<div class="sm:col-span-2">
 					<label for="file" class="block mb-1 font-semibold">Icon</label>
 					<p class="text-sm text-gray-500 mb-1">
 						Please upload a 512x512 image for the icon and we'll generate the remaining sizes
@@ -261,15 +261,15 @@
 				</div>
 				<button
 					type="submit"
-					class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-2 disabled:opacity-50 disabled:pointer-events-none"
+					class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded sm:col-span-2 disabled:opacity-50 disabled:pointer-events-none"
 					disabled={isSubmitDisabled}
 				>
 					Generate Manifest
 				</button>
 			</form>
 		</div>
-		<div class="basis-1/3">
-			<div class="p-4">
+		<div class="w-full md:basis-1/3">
+			<div class="p-2">
 				<h3 class="text-lg font-semibold mb-2">manifest.json preview</h3>
 				<pre class="overflow-auto max-h-96 bg-gray-100 dark:bg-gray-600 p-5"><code
 						class="dark:text-white">{manifestPreview}</code
@@ -278,7 +278,7 @@
 		</div>
 	</div>
 	<p class="mb-2">
-		The Manifest.json File Generator is an online tool that facilitates easy creation of a manifest
+		The Manifest File Generator is an online tool that facilitates the creation of a manifest
 		file for your web application. The JSON manifest is a configuration file that defines basic
 		information about your application such as name, icon, colors, and other properties. With our
 		tool, you can quickly configure the manifest, customizing it to suit your application's
@@ -295,13 +295,12 @@
 		ready to be added to your project.
 	</p>
 	<p class="mb-2">Start using our tool today and enhance the visibility of your web application!</p>
-	<p class="mb-2">
+	<p class="mb-10">
 		This project is Open Source. You can see source code here: <a
 			href="https://github.com/kamilwyremski/manifest-generator"
 			title="Manifest Generator Source Code">https://github.com/kamilwyremski/manifest-generator</a
 		>
 	</p>
-	<p class="mb-10">Happy coding!</p>
 	<p class="text-sm">
 		Project 2024 by <a href="http://wyremski.pl/en" title="Web Developer">Kamil Wyremski</a>
 	</p>
