@@ -120,8 +120,11 @@
 			const image = new Image();
 
 			image.onload = function () {
-				if (image.width !== 512 || image.height !== 512) {
-					errorImageMessage = 'The image must have a size of 512x512 pixels.';
+				if (image.width !== image.height) {
+					errorImageMessage = 'The image must be square';
+					return;
+				} else if (image.width < 512) {
+					errorImageMessage = 'The image must be at least 512x512 pixels.';
 					return;
 				}
 				formData.icons = file;
@@ -144,6 +147,10 @@
 		null,
 		2
 	);
+
+	function copyToClipboard() {
+		navigator.clipboard.writeText(manifestPreview);
+	}
 </script>
 
 <div class="container mx-auto p-5 md:p-10 dark:bg-gray-800 dark:text-white">
@@ -246,7 +253,8 @@
 				<div class="sm:col-span-2">
 					<label for="file" class="block mb-1 font-semibold">Icon</label>
 					<p class="text-sm text-gray-500 mb-1">
-						Please upload a 512x512 image for the icon and we'll generate the remaining sizes
+						Please upload a square image with a minimum size of 512x512 pixels for the icon, and
+						we'll generate the remaining sizes.
 					</p>
 					<input
 						id="file"
@@ -261,7 +269,7 @@
 				</div>
 				<button
 					type="submit"
-					class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded sm:col-span-2 disabled:opacity-50 disabled:pointer-events-none"
+					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded sm:col-span-2 disabled:opacity-50 disabled:pointer-events-none"
 					disabled={isSubmitDisabled}
 				>
 					Generate Manifest
@@ -271,15 +279,22 @@
 		<div class="w-full md:basis-1/3">
 			<div class="p-2">
 				<h3 class="text-lg font-semibold mb-2">manifest.json preview</h3>
-				<pre class="overflow-auto max-h-96 bg-gray-100 dark:bg-gray-600 p-5"><code
-						class="dark:text-white">{manifestPreview}</code
-					></pre>
+				<div class="relative">
+					<pre class="overflow-auto max-h-96 bg-gray-100 dark:bg-gray-600 p-5"><code
+							class="dark:text-white">{manifestPreview}</code
+						></pre>
+					<button
+						on:click={copyToClipboard}
+						class="absolute top-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
+						>Copy</button
+					>
+				</div>
 			</div>
 		</div>
 	</div>
 	<p class="mb-2">
-		The Manifest File Generator is an online tool that facilitates the creation of a manifest
-		file for your web application. The JSON manifest is a configuration file that defines basic
+		The Manifest File Generator is an online tool that facilitates the creation of a manifest file
+		for your web application. The JSON manifest is a configuration file that defines basic
 		information about your application such as name, icon, colors, and other properties. With our
 		tool, you can quickly configure the manifest, customizing it to suit your application's
 		requirements.
