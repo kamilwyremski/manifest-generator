@@ -2,8 +2,8 @@
 	import JSZip from 'jszip';
 
 	const formData = {
-		name: '',
-		short_name: '',
+		name: 'App Name',
+		short_name: 'App',
 		display: 'browser',
 		description: '',
 		scope: '/',
@@ -153,7 +153,7 @@
 	}
 </script>
 
-<div class="container mx-auto p-5 md:p-10 dark:bg-gray-800 dark:text-white">
+<div class="container mx-auto p-5 md:p-10">
 	<h1 class="text-2xl font-bold mb-4">Manifest Generator</h1>
 	<div class="flex flex-col gap-4 mb-10 md:flex-row">
 		<div class="w-full md:basis-2/3">
@@ -253,8 +253,8 @@
 				<div class="sm:col-span-2">
 					<label for="file" class="block mb-1 font-semibold">Icon</label>
 					<p class="text-sm text-gray-500 mb-1">
-						Please upload a square image with a minimum size of 512x512 pixels for the icon, and
-						we'll generate the remaining sizes.
+						Please upload a image with a minimum size of 512x512 pixels for the icon, and we'll
+						generate the remaining sizes.
 					</p>
 					<input
 						id="file"
@@ -317,6 +317,6 @@
 		>
 	</p>
 	<p class="text-sm">
-		Project 2024 by <a href="http://wyremski.pl/en" title="Web Developer">Kamil Wyremski</a>
+		Project 2024 - 2026 by <a href="http://wyremski.pl/en" title="Web Developer">Kamil Wyremski</a>
 	</p>
 </div>
