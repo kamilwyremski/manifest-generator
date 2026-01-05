@@ -120,14 +120,43 @@
 			const image = new Image();
 
 			image.onload = function () {
-				if (image.width !== image.height) {
-					errorImageMessage = 'The image must be square';
-					return;
-				} else if (image.width < 512) {
+				const minDimension = Math.min(image.width, image.height);
+				if (minDimension < 512) {
 					errorImageMessage = 'The image must be at least 512x512 pixels.';
 					return;
 				}
-				formData.icons = file;
+
+				// If already square, use original file
+				if (image.width === image.height) {
+					formData.icons = file;
+					return;
+				}
+
+				// Crop image to square
+				const canvas = document.createElement('canvas');
+				canvas.width = minDimension;
+				canvas.height = minDimension;
+				const ctx = canvas.getContext('2d');
+				if (ctx) {
+					const offsetX = (image.width - minDimension) / 2;
+					const offsetY = (image.height - minDimension) / 2;
+					ctx.drawImage(
+						image,
+						offsetX,
+						offsetY,
+						minDimension,
+						minDimension,
+						0,
+						0,
+						minDimension,
+						minDimension
+					);
+					canvas.toBlob((blob) => {
+						if (blob) {
+							formData.icons = new File([blob], file.name, { type: 'image/png' });
+						}
+					}, 'image/png');
+				}
 			};
 			image.src = URL.createObjectURL(file);
 		}
